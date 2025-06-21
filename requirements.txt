@@ -1,0 +1,9 @@
+streamlit==1.28.1
+requests==2.31.0
+gql==3.4.1
+aiohttp==3.9.1
+pandas==2.1.4
+pytrends==4.9.2
+snscrape==0.7.0.20230622
+asyncio-throttle==1.0.2
+python-dotenv==1.0.0 
