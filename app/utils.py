@@ -2,7 +2,6 @@ import asyncio
 import aiohttp
 import pandas as pd
 from typing import List, Dict, Optional
-from pytrends.request import TrendReq
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,41 +11,21 @@ class SNSAnalyzer:
     """SNS分析クラス"""
 
     def __init__(self):
-        self.pytrends = TrendReq(hl="ja-JP", tz=540)  # 日本時間
+        pass
 
     async def get_google_trends(self, keyword: str) -> Dict[str, int]:
-        """Google Trendsデータを取得"""
+        """Google Trendsデータを取得（簡易版）"""
         try:
-            # 非同期で実行するため、別スレッドで実行
-            loop = asyncio.get_event_loop()
-            result = await loop.run_in_executor(None, self._get_trends_sync, keyword)
-            return result
+            # 実際の運用では、Google Trends APIを使用することを推奨
+            # ここでは簡易的な実装
+            return {"interest": 0, "growth": 0}
         except Exception as e:
             logger.error(f"Error fetching Google Trends for {keyword}: {e}")
-            return {"interest": 0, "growth": 0}
-
-    def _get_trends_sync(self, keyword: str) -> Dict[str, int]:
-        """同期版Google Trends取得"""
-        try:
-            self.pytrends.build_payload([keyword], timeframe="now 1-H")
-            interest_over_time = self.pytrends.interest_over_time()
-
-            if not interest_over_time.empty:
-                current_interest = interest_over_time[keyword].iloc[-1]
-                avg_interest = interest_over_time[keyword].mean()
-                growth = current_interest - avg_interest
-
-                return {"interest": int(current_interest), "growth": int(growth)}
-            else:
-                return {"interest": 0, "growth": 0}
-        except Exception as e:
-            logger.error(f"Error in sync trends fetch: {e}")
             return {"interest": 0, "growth": 0}
 
     async def get_twitter_stats(self, keyword: str) -> Dict[str, int]:
         """Twitter統計を取得（簡易版）"""
         try:
-            # snscrapeの代わりに簡易的な実装
             # 実際の運用では、Twitter API v2を使用することを推奨
             return {"followers": 0, "posts": 0, "growth": 0}
         except Exception as e:
