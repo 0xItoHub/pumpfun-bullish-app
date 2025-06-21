@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: pumpfun-screener
+    env: python
+    buildCommand: chmod +x setup.sh && ./setup.sh
+    startCommand: streamlit run app/app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.7 
