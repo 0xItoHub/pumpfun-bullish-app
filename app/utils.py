@@ -3,7 +3,6 @@ import aiohttp
 import pandas as pd
 from typing import List, Dict, Optional
 from pytrends.request import TrendReq
-import snscrape.modules.twitter as sntwitter
 import logging
 
 logger = logging.getLogger(__name__)
@@ -45,35 +44,13 @@ class SNSAnalyzer:
             return {"interest": 0, "growth": 0}
 
     async def get_twitter_stats(self, keyword: str) -> Dict[str, int]:
-        """Twitter統計を取得"""
+        """Twitter統計を取得（簡易版）"""
         try:
-            loop = asyncio.get_event_loop()
-            result = await loop.run_in_executor(None, self._get_twitter_sync, keyword)
-            return result
+            # snscrapeの代わりに簡易的な実装
+            # 実際の運用では、Twitter API v2を使用することを推奨
+            return {"followers": 0, "posts": 0, "growth": 0}
         except Exception as e:
             logger.error(f"Error fetching Twitter stats for {keyword}: {e}")
-            return {"followers": 0, "posts": 0, "growth": 0}
-
-    def _get_twitter_sync(self, keyword: str) -> Dict[str, int]:
-        """同期版Twitter統計取得"""
-        try:
-            # 過去1時間のツイート数を取得
-            tweets = list(
-                sntwitter.TwitterSearchScraper(f"{keyword} since:1h").get_items()
-            )
-
-            # ユーザー情報を取得（最初のツイートから）
-            if tweets:
-                user = tweets[0].user
-                return {
-                    "followers": user.followersCount,
-                    "posts": len(tweets),
-                    "growth": len(tweets),  # 簡易的な成長指標
-                }
-            else:
-                return {"followers": 0, "posts": 0, "growth": 0}
-        except Exception as e:
-            logger.error(f"Error in sync Twitter fetch: {e}")
             return {"followers": 0, "posts": 0, "growth": 0}
 
 
