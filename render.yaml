@@ -2,12 +2,13 @@ services:
   - type: web
     name: pumpfun-screener
     env: python
-    pythonVersion: "3.11.7"
+    pythonVersion: "3.10.12"
     buildCommand: |
       python --version
-      pip install --upgrade pip setuptools wheel
-      pip install -r requirements.txt
+      python -m pip install --upgrade pip
+      python -m pip install --upgrade setuptools wheel
+      python -m pip install -r requirements.txt
     startCommand: streamlit run app/app.py --server.port $PORT --server.address 0.0.0.0
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.7 
+        value: 3.10.12 
