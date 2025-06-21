@@ -30,8 +30,8 @@ Pump.funの爆上げ銘柄をリアルタイムでスクリーニングするWeb
 ### 1. リポジトリのクローン
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/pumpfun-screener.git
-cd pumpfun-screener
+git clone https://github.com/0xItoHub/pumpfun-bullish-app.git
+cd pumpfun-bullish-app
 ```
 
 ### 2. 依存関係のインストール
@@ -164,9 +164,9 @@ def calculate_score(self, row: Dict) -> float:
 
 ## 📞 サポート
 
-- バグ報告: [GitHub Issues](https://github.com/YOUR_USERNAME/pumpfun-screener/issues)
-- 機能要望: [GitHub Discussions](https://github.com/YOUR_USERNAME/pumpfun-screener/discussions)
-- 技術的な質問: [GitHub Discussions](https://github.com/YOUR_USERNAME/pumpfun-screener/discussions)
+- バグ報告: [GitHub Issues](https://github.com/0xItoHub/pumpfun-bullish-app/issues)
+- 機能要望: [GitHub Discussions](https://github.com/0xItoHub/pumpfun-bullish-app/discussions)
+- 技術的な質問: [GitHub Discussions](https://github.com/0xItoHub/pumpfun-bullish-app/discussions)
 
 ## 📄 ライセンス
 
